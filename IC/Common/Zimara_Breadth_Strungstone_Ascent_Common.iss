@@ -238,6 +238,10 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "722.174927,287.096527,485.689911"
 
 	call move_to_next_waypoint "691.190247,292.675354,520.994080"
+	call move_to_next_waypoint "692.309937,277.094482,487.822662"
+	call move_to_next_waypoint "700.247437,284.064484,472.898254"
+	call move_to_next_waypoint "717.776428,286.716827,480.536743"
+	call move_to_next_waypoint "717.447937,287.117676,497.626862"
 	call move_to_next_waypoint "626.729126,281.829041,553.989624"
 	call move_to_next_waypoint "583.938843,271.840851,543.145752"
 	call move_to_next_waypoint "583.938843,271.840851,543.145752"
