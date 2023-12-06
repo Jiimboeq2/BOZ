@@ -181,9 +181,12 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "2"
 	call move_to_next_waypoint "790.781494,189.071548,387.040802"
+	call move_to_next_waypoint "625.949341,206.747116,-569.715088"
+	call move_to_next_waypoint "647.985779,207.478333,-464.141602"
+
 
 	oc !ci -special igw:${Me.Name}
-	wait 15
+	wait 35
 
 	call move_to_next_waypoint "714.309998,176.570007,273.679993"
 	call move_to_next_waypoint "737.027161,184.310257,314.925293"
