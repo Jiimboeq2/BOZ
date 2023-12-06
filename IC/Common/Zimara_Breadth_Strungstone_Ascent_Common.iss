@@ -32,7 +32,7 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-		call Obj_OgreIH.Obj_OgreTravelMesh.Travel "${sZoneName}" -delay 55
+		call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
 		
 			if !${Return}
 			{
