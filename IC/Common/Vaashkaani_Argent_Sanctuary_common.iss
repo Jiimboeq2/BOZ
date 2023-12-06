@@ -159,23 +159,9 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "-54.846382,3.027271,3.064041"
 	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
 	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
-	
-	;====================================
-	call kill_trash
-
-	wait 50
-	call chimken
-	;====================================
 
 	call move_to_next_waypoint "-62.177113,3.027377,-15.457197"
 	call move_to_next_waypoint "-32.259029,2.955953,44.273453"
-
-	;====================================
-	call kill_trash
-
-	wait 50
-	call chimken
-	;====================================
 
 	call move_to_next_waypoint "11.923247,2.956032,33.528576"
 	call move_to_next_waypoint "21.517860,3.459791,28.045519"
@@ -321,13 +307,6 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "99.749557,7.944616,-305.060638"
 
 
-	;====================================
-	ogre qh
-	;====================================
-
-	wait 95
-	
-
 	Ob_AutoTarget:AddActor["Ra'Zaal's ghul",20,FALSE,TRUE]
 	Ob_AutoTarget:AddActor["General Ra'Zaa",20,FALSE,TRUE]
 
@@ -353,64 +332,6 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	return TRUE
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	
-function:bool Named3(string _NamedNPC="Doesnotexist")
-{
-	variable point3f KillSpot="262.286865,3.451231,-59.398415"
-
-; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "3"
-	call move_to_next_waypoint "211.571640,3.457150,-0.032361"
-	call move_to_next_waypoint "220.684296,3.488279,-58.990791"
-
-	;====================================
-	call kill_trash
-
-	wait 50
-	call chimken
-	;====================================
-
-	call move_to_next_waypoint "213.731613,3.578094,-19.526731"
-	call move_to_next_waypoint "254.544434,3.457150,-0.666980"
-	call move_to_next_waypoint "262.352112,3.450968,-23.537100"
-	
-;	Check if already killed
-	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
-		return TRUE
-	}
-
-;	Kill named
-	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
-	{
-		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-	
-;	Check named is dead
-	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
-		return FALSE
-	}
-	return TRUE
-}
 
 /**********************************************************************************************************
  	 **********************    Jobs done! ***********************************
@@ -611,16 +532,16 @@ function Tank_n_Spank(string _NamedNPC, point3f KillSpot)
 	wait 50
 }
 
-function chimken()
-	{
-    if ${Actor["an unwell wisher"].Distance} <= 5
-		{
-            oc ${Me.Name} - saving the dude
-            Actor[${Actor["an unwell wisher"]}]:DoubleClick
-			wait 25
-			ogre qh1
-		}
-    }
+;function chimken()
+;	{
+;    if ${Actor["an unwell wisher"].Distance} <= 5
+	;	{
+   ;         oc ${Me.Name} - saving the dude
+    ;        Actor[${Actor["an unwell wisher"]}]:DoubleClick
+;			wait 25
+	;		ogre qh1
+	;	}
+ ;   }
 
 function HO(string Mode)
 {
