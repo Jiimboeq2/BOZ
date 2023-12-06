@@ -275,7 +275,6 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 /**********************************************************************************************************
  	Named 4 *********************    Move to, spawn and kill - Crisj'Jen the Bold ********************************
 ***********************************************************************************************************/
-	
 function:bool Named4(string _NamedNPC="Doesnotexist")
 {
 	variable point3f KillSpot="87.784958,385.899536,740.259766"
@@ -283,18 +282,17 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "4"
 	call move_to_next_waypoint "475.058960,307.776306,606.338989"
-	call move_to_next_waypoint "404.734344,333.110077,634.990479"
-	call move_to_next_waypoint "370.459808,359.257050,578.642883"
-	call move_to_next_waypoint "388.295776,368.584259,542.822510"
-	call move_to_next_waypoint "423.533356,379.876953,551.820984"
-	call move_to_next_waypoint "428.731750,381.948059,564.206543"
-	call move_to_next_waypoint "423.389954,382.434906,578.428406"
-	call move_to_next_waypoint "364.254150,400.118683,588.583130"
-
-	call move_to_next_waypoint "344.923431,402.005127,598.494202"
+	call move_to_next_waypoint "526.540222,284.453308,555.244324"
+	call move_to_next_waypoint "457.700165,315.776825,618.363708"
+	call move_to_next_waypoint "408.605652,333.213562,628.416626"
+	call move_to_next_waypoint "377.349304,349.788025,604.117981"
+	call move_to_next_waypoint "373.374756,360.436951,569.388245"
+	call move_to_next_waypoint "377.481934,366.617554,542.506714"
+	call move_to_next_waypoint "427.963776,380.668121,552.264771"
+	call move_to_next_waypoint "422.493256,382.447754,578.354370"
+	call move_to_next_waypoint "344.552277,402.069672,598.133850"
 	oc !ci -special igw:${Me.Name}
 	wait 35
-
 
 	call move_to_next_waypoint "153.581924,362.173767,677.004272"
 	call move_to_next_waypoint "113.925377,373.424347,704.549866"
