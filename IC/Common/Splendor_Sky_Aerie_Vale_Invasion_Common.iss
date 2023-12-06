@@ -209,7 +209,7 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "-789.190613,84.715439,620.502930"
 	
 	oc !ci -special igw:${Me.Name}
-	wait 15
+	wait 20
 
 	call move_to_next_waypoint "-987.140015,170.550003,635.390015"
 	call move_to_next_waypoint "-1010.204224,176.603241,709.020874"
