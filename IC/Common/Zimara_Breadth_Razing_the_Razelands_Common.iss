@@ -233,6 +233,7 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "47.598545,144.789001,-272.262054"
 	call move_to_next_waypoint "91.890930,145.275620,-299.213867"
 	call move_to_next_waypoint "88.179649,148.760986,-305.407745"
+	call move_to_next_waypoint "79.823105,149.739700,-320.016785"
 	Ob_AutoTarget:AddActor["Yazdani Surger",50,FALSE,TRUE]
 	Ob_AutoTarget:AddActor["Sina A'rak",50,FALSE,TRUE]
 
