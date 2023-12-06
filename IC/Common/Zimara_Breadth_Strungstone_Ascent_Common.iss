@@ -246,7 +246,7 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "583.938843,271.840851,543.145752"
 	call move_to_next_waypoint "583.938843,271.840851,543.145752"
 	call move_to_next_waypoint "542.834839,279.168427,534.507507"
-
+	Ob_AutoTarget:AddActor["Barlanka",15,FALSE,TRUE]
 	
 	
 ;	Check if already killed
