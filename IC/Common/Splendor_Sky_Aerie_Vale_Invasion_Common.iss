@@ -1,7 +1,7 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
-variable string Solo_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Solo]"
-variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Event Heroic]"
+variable string Solo_Zone_Name="Splendor Sky Aerie: Vale Invasion [Solo]"
+variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Vale Invasion [Event Heroic I]
 variable string Heroic_2_Zone_Name="X"
 variable int DefaultScanRadius="30"
 variable int ShiniesLooted="0"
