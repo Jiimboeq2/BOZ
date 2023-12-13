@@ -56,10 +56,10 @@ objectdef Object_Instance
 
 		if ${_StartingPoint} == 1
 		{
-			call This.Named2 "Nezri En'Sallef"
+			call This.Named1 "Nezri En'Sallef"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#2: Nezri En'Sallef"]
+				Obj_OgreIH:Message_FailedZone["#1: Nezri En'Sallef"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
@@ -149,6 +149,7 @@ objectdef Object_Instance
 function:bool Named1(string _NamedNPC="Doesnotexist")
 {
 	variable point3f KillSpot="113.382271,20.296247,0.287039"
+	Ob_AutoTarget:AddActor["Nezri En'Sallef",10,FALSE,TRUE]
 
 ; 	Move to named and spawn
 	echo ${Me.Equipment[primary].ToItemInfo.Condition}
@@ -159,8 +160,6 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 	}
 	call HO "All"
 
-
-	call initialise_move_to_next_boss "${_NamedNPC}" "1"
 	call move_to_next_waypoint "-37.129135,2.955953,48.540016"
 	call move_to_next_waypoint "10.316024,2.956148,39.649601"
 	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
@@ -171,9 +170,12 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
     call move_to_next_waypoint "-41.992428,2.955953,-31.799765"
     call move_to_next_waypoint "-14.447911,10.706121,-35.103539"
 	call move_to_next_waypoint "11.864040,19.921078,0.348867"
+
+	call initialise_move_to_next_boss "${_NamedNPC}" "1"
+
 	call move_to_next_waypoint "113.382271,20.296247,0.287039"
 
-	Ob_AutoTarget:AddActor["Nezri En'Sallef",10,FALSE,TRUE]
+	
 
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
