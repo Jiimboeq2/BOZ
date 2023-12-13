@@ -33,7 +33,8 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"		
+		Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
+		
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone
@@ -81,10 +82,10 @@ call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
 		; 	Enter name and shinies nav point for Named 3.
 		if ${_StartingPoint} == 3
 		{
-			call This.Named2 "The Storm Mistress "
+			call This.Named2 "The Storm Mistress"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#3: The Storm Mistress "]
+				Obj_OgreIH:Message_FailedZone["#3: The Storm Mistress"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
@@ -250,11 +251,12 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 {
 	variable point3f KillSpot="261.389191,31.245022,-54.113739"
 
+	call HO "All"
 
 ; 	Move to named and spawn
     call move_to_next_waypoint "260.585815,31.982433,62.767784"
     oc !ci -special igw:${Me.Name}
-	call initialise_move_to_next_boss "${_NamedNPC}" "4"
+	call initialise_move_to_next_boss "${_NamedNPC}" "3"
 
 	call mend_and_rune_swap "stifle"
 
@@ -292,7 +294,7 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 /**********************************************************************************************************
  	Named 4 *********************    Move to, spawn and kill - Hezodhan ********************************
 ***********************************************************************************************************/
-	
+
 function:bool Named4(string _NamedNPC="Doesnotexist")
 {
 
@@ -306,7 +308,7 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 	variable point3f KillSpot="438.740540,6.816512,-0.284076"
 
 ; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "5"
+	call initialise_move_to_next_boss "${_NamedNPC}" "4"
 
 	call move_to_next_waypoint "261.123199,31.504650,0.623502"
 	call move_to_next_waypoint "280.255615,31.613644,-0.273382"
@@ -340,6 +342,7 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
+}
 
  /**********************************************************************************************************
  	Named 5 *********************    Move to, spawn and kill - Ashnu + Sovereign dude ********************************
@@ -363,7 +366,7 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	variable point3f KillSpot="438.740540,6.816512,-0.284076"
 
 ; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "6"
+	call initialise_move_to_next_boss "${_NamedNPC}" "5"
 
 	call move_to_next_waypoint "367.322815,31.608864,-0.063050"
 	call move_to_next_waypoint "338.425751,31.492619,-0.661140"
@@ -650,6 +653,5 @@ function HO(string Mode)
 	wait 1
 	oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+@healer1 checkbox_settings_ho_starter FALSE TRUE
 	oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+@healer1 checkbox_settings_ho_wheel FALSE TRUE
-}
 }
 }
