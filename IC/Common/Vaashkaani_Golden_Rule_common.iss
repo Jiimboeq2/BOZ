@@ -148,7 +148,7 @@ objectdef Object_Instance
 
 function:bool Named1(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="113.382271,20.296247,0.287039"
+	variable point3f KillSpot="145.784149,20.303329,-0.008304"
 	Ob_AutoTarget:AddActor["Nezri En'Sallef",10,FALSE,TRUE]
 
 ; 	Move to named and spawn
@@ -160,20 +160,21 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 	}
 	call HO "All"
 
-	call move_to_next_waypoint "-37.129135,2.955953,48.540016"
-	call move_to_next_waypoint "10.316024,2.956148,39.649601"
-	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
-    call move_to_next_waypoint "-22.198175,2.649488,5.898004"
-    call move_to_next_waypoint "-26.616255,2.955953,-49.006821"
-    call move_to_next_waypoint "7.636251,2.955472,-43.141899"
-    call move_to_next_waypoint "-35.176208,2.955953,-42.859924"
-    call move_to_next_waypoint "-41.992428,2.955953,-31.799765"
-    call move_to_next_waypoint "-14.447911,10.706121,-35.103539"
-	call move_to_next_waypoint "11.864040,19.921078,0.348867"
+	call move_to_next_waypoint "-63.853203,3.085319,0.848909"
+	call move_to_next_waypoint "-32.192711,3.252077,-30.456238"
+	call move_to_next_waypoint "-15.910347,10.125579,-36.401478"
+    call move_to_next_waypoint "-7.987914,13.233233,-35.427891"
+    call move_to_next_waypoint "-0.990818,16.244753,-32.399117"
+    call move_to_next_waypoint "5.867332,19.375635,-27.625574"
+    call move_to_next_waypoint "7.898909,19.871166,-17.817272"
+    call move_to_next_waypoint "9.470225,19.917973,-0.266956"
+    call move_to_next_waypoint "120.931931,20.296247,0.382850"
 
 	call initialise_move_to_next_boss "${_NamedNPC}" "1"
 
-	call move_to_next_waypoint "113.382271,20.296247,0.287039"
+	call move_to_next_waypoint "11.864040,19.921078,0.348867"
+
+
 
 	
 
@@ -205,19 +206,42 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 	
 function:bool Named2(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="262.969055,31.245022,54.764423"
+	variable point3f KillSpot="262.198151,31.245022,58.916054"
 
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "2"
-	call move_to_next_waypoint "186.106308,30.525686,0.086662"
+	call move_to_next_waypoint "209.316299,31.504650,-0.151778"
 	call move_to_next_waypoint "210.761063,31.596615,-9.813629"
-    call move_to_next_waypoint "214.605759,31.245022,-44.934723" 
-    call move_to_next_waypoint "223.556488,31.984165,-46.897816" 
+    call move_to_next_waypoint "213.432541,31.245022,52.049480" 
+	wait 50
+	 call move_to_next_waypoint "224.365341,32.562355,45.469532"
 	oc !ci -special igw:${Me.Name}
+	wait 50
+
+	call move_to_next_waypoint "224.365341,32.562355,45.469532"
+	wait 50
+	oc !ci -special igw:${Me.Name}
+	wait 50
+
+	call move_to_next_waypoint "212.496948,31.245022,42.624424" 
+    call move_to_next_waypoint "213.071732,31.777447,10.870465" 
+	call move_to_next_waypoint "222.739456,31.504650,1.152017"
+	call move_to_next_waypoint "211.412064,31.438419,-26.274744"
+	call move_to_next_waypoint "214.244415,31.245022,-44.421112"
+	call move_to_next_waypoint "223.009338,32.181305,-44.738777"
+	oc !ci -special igw:${Me.Name}
+	wait 50
+	call move_to_next_waypoint "203.683121,32.214455,-44.644077"
+	oc !ci -special igw:${Me.Name}
+	wait 50
     call move_to_next_waypoint "203.492325,32.222984,-44.860386"
     call move_to_next_waypoint "218.625458,31.504650,-6.464325"
-    call move_to_next_waypoint "223.949478,31.504650,0.332479"
-    call move_to_next_waypoint "261.942383,31.504650,1.929319"
+	call move_to_next_waypoint "223.949478,31.504650,0.332479"
+	call move_to_next_waypoint "261.783325,31.504650,-1.642059"
+	call move_to_next_waypoint "261.654205,31.421638,-61.202709"
+    call move_to_next_waypoint "261.486786,31.797768,9.345303"
+	call move_to_next_waypoint "261.155304,31.449314,22.364616"
+ 
 	
 	Ob_AutoTarget:AddActor["Isos",20,FALSE,TRUE]
 ;	Check if already killed
@@ -240,6 +264,9 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
+	call move_to_next_waypoint "261.314362,31.816750,62.314568"
+	oc !ci -special igw:${Me.Name}
+	wait 50
 }
 
 
@@ -251,8 +278,8 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 	
 function:bool Named3(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="261.389191,31.245022,-54.113739"
-
+	variable point3f KillSpot="261.988464,31.245022,-48.247028"
+;	TODO ADD CAMPSPOT TO MOST RECENT LIGHTNING BOI
 	call HO "All"
 
 ; 	Move to named and spawn
@@ -290,6 +317,9 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
+	call move_to_next_waypoint "263.070831,31.612640,-61.744865"
+	oc !c -special igw:${Me.Name}
+	wait 50
 }
 
 
