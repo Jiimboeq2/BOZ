@@ -1,7 +1,7 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
 variable string Solo_Zone_Name="Splendor Sky Aerie: Vale Invasion [Solo]"
-variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Vale Invasion [Event Heroic I]
+variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Vale Invasion [Event Heroic I]"
 variable string Heroic_2_Zone_Name="X"
 variable int DefaultScanRadius="30"
 variable int ShiniesLooted="0"
@@ -32,7 +32,8 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-	call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"		
+		Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
+		
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone
@@ -155,13 +156,10 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 	call initialise_move_to_next_boss "${_NamedNPC}" "2"
 	call move_to_next_waypoint "-724.611267,59.297394,463.641052"
 	call move_to_next_waypoint "-741.148376,58.705959,507.457520"
-	call move_to_next_waypoint "-662.628052,63.701622,557.983337"
-	call move_to_next_waypoint "-556.671204,79.371529,675.086365"
-	call move_to_next_waypoint "-766.982666,58.100899,488.089508"
-	call move_to_next_waypoint "-551.017212,79.713196,676.099304"
-		
-	call kill_trash
-
+	call move_to_next_waypoint "-655.089783,61.819851,568.705017"
+	call move_to_next_waypoint "-622.185669,62.209690,621.610718"
+	call move_to_next_waypoint "-592.395874,74.911697,658.278381"
+	call move_to_next_waypoint "-569.801392,78.435776,671.573792"
 	call move_to_next_waypoint "-557.625000,79.690636,677.535522"
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -206,10 +204,11 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 
 	}
 	call move_to_next_waypoint "-789.190613,84.715439,620.502930"
-	
-	oc !ci -special igw:${Me.Name}
-	wait 20
 
+	oc !c -pause 
+	oc !ci -special igw:${Me.Name}
+	wait 65
+	oc !c -resume All
 	call move_to_next_waypoint "-987.140015,170.550003,635.390015"
 	call move_to_next_waypoint "-1010.204224,176.603241,709.020874"
 	call move_to_next_waypoint "-1009.932678,176.591400,708.154663"

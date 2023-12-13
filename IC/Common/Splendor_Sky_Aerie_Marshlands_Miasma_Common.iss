@@ -1,9 +1,9 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
 variable string Solo_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Solo]"
-variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Event Heroic]"
+variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Event Heroic I]"
 variable string Heroic_2_Zone_Name="X"
-variable int DefaultScanRadius="30"
+variable int DefaultScanRadius="40"
 variable int ShiniesLooted="0"
 
 #include "${LavishScript.HomeDirectory}/Scripts/EQ2OgreBot/InstanceController/Ogre_Instance_Include.iss"
@@ -32,7 +32,8 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-			call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"		
+		Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
+		
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone
