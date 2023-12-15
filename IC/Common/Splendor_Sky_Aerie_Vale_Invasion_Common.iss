@@ -1,9 +1,8 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
-variable string Solo_Zone_Name="Vaashkaani: Golden Rule [Solo]"
-variable string Heroic_1_Zone_Name="Vaashkaani: Golden Rule [Heroic I]"  
-; i think that's an H1 it has , will circle back
-variable string Heroic_2_Zone_Name="x"
+variable string Solo_Zone_Name="Splendor Sky Aerie: Vale Invasion [Solo]"
+variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Vale Invasion [Event Heroic I]"
+variable string Heroic_2_Zone_Name="X"
 variable int DefaultScanRadius="30"
 variable int ShiniesLooted="0"
 
@@ -24,7 +23,7 @@ objectdef Object_Instance
 		oc !ci -LetsGo igw:${Me.Name}
 		Obj_OgreIH:SetCampSpot
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_movetoarea TRUE TRUE
-		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} textentry_setup_moveintomeleerangemaxdistance 20 TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} textentry_setup_moveintomeleerangemaxdistance 20 FALSE
 		if ${Zone.Name.Equals["${Solo_Zone_Name}"]}
 		{
 			Obj_InstanceControllerXML:Set_ICFileOption[1,"Graceless on Boss Only"]
@@ -53,80 +52,49 @@ objectdef Object_Instance
 			_StartingPoint:Inc
 		}
 ; 	Enter name and shinies nav point for Named 1.
-
 		if ${_StartingPoint} == 1
 		{
-			call This.Named1 "Nezri En'Sallef"
+			call This.Named1 "Magmalatorr"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#1: Nezri En'Sallef"]
+				Obj_OgreIH:Message_FailedZone["#1: Magmalatorr"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-; 	Enter name and shinies nav point for Named 2.				
+; 	Enter name and shinies nav point for Named 2.
 		if ${_StartingPoint} == 2
 		{
-			call This.Named3 "Isos"
+			call This.Named2 "Tkesh'Tura"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#3: Isos"]
+				Obj_OgreIH:Message_FailedZone["#2: Tkesh'Tura"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-		
-
-		; 	Enter name and shinies nav point for Named 3.
+; 	Enter name and shinies nav point for Named 3.				
 		if ${_StartingPoint} == 3
 		{
-			call This.Named2 "The Storm Mistress"
+			call This.Named3 "Kusala'Din"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#3: The Storm Mistress"]
+				Obj_OgreIH:Message_FailedZone["#3: Kusala'Din"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-
-; 	Enter name and shinies nav point for Named 4.				
-		if ${_StartingPoint} == 4
-		{
-			call This.Named3 "Hezodhan"
-			if !${Return}
-			{
-				Obj_OgreIH:Message_FailedZone["#4: Hezodhan"]
-				return FALSE
-			}
-			call Obj_OgreIH.Get_Chest
-			_StartingPoint:Inc
-		}
-
-
-		; 	Enter name and shinies nav point for Named 6.				
-		if ${_StartingPoint} == 5
-		{
-			call This.Named3 "Ashnu"
-			if !${Return}
-			{
-				Obj_OgreIH:Message_FailedZone["#5: Ashnu"]
-				return FALSE
-			}
-			call Obj_OgreIH.Get_Chest
-			_StartingPoint:Inc
-		}
-
+; 	Enter name and shinies nav point for Named 4.
 		
-; 	Enter /loc for the zone out	and change _StartingPoint == 
-
-		if ${_StartingPoint} == 6
+; 	Enter /loc for the zone out	and change _StartingPoint == 4 for Event Heroic	
+		if ${_StartingPoint} == 4
 		{
 			Ob_AutoTarget:Clear
 			Obj_OgreIH:LetsGo
-			call Obj_OgreUtilities.NavToLoc "592.834717,71.106186,-54.819336"
+			call Obj_OgreUtilities.NavToLoc "-1094.852539,181.887985,738.302551"
 			call Obj_OgreUtilities.HandleWaitForGroupDistance 5
 			oc ${Me.Name} looted ${ShiniesLooted} shinies
 			call Obj_OgreIH.ZoneNavigation.ZoneOut
@@ -140,43 +108,19 @@ objectdef Object_Instance
 		return TRUE
 	}
 
-
-
 /**********************************************************************************************************
-    Named 1 **********************    Move to, spawn and kill - Nezri En'Sallef  ********************************
+    Named 1 **********************    Move to, spawn and kill - Magmalatorr  ********************************
 ***********************************************************************************************************/
 
 function:bool Named1(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="145.784149,20.303329,-0.008304"
-	Ob_AutoTarget:AddActor["Nezri En'Sallef",10,FALSE,TRUE]
+	variable point3f KillSpot="-743.817078,62.863625,420.417206"
 
 ; 	Move to named and spawn
-	echo ${Me.Equipment[primary].ToItemInfo.Condition}
-	wait 5
-	if ${Me.Equipment[primary].ToItemInfo.Condition} < 50
-	{
-		call mend_and_rune_swap "stun"
-	}
-	call HO "All"
-
-	call move_to_next_waypoint "-63.853203,3.085319,0.848909"
-	call move_to_next_waypoint "-32.192711,3.252077,-30.456238"
-	call move_to_next_waypoint "-15.910347,10.125579,-36.401478"
-    call move_to_next_waypoint "-7.987914,13.233233,-35.427891"
-    call move_to_next_waypoint "-0.990818,16.244753,-32.399117"
-    call move_to_next_waypoint "5.867332,19.375635,-27.625574"
-    call move_to_next_waypoint "7.898909,19.871166,-17.817272"
-    call move_to_next_waypoint "9.470225,19.917973,-0.266956"
-    call move_to_next_waypoint "120.931931,20.296247,0.382850"
-
 	call initialise_move_to_next_boss "${_NamedNPC}" "1"
-
-	call move_to_next_waypoint "11.864040,19.921078,0.348867"
-
-
-
-	
+	call move_to_next_waypoint "-749.044250,63.188805,417.872040"
+	call move_to_next_waypoint "-742.086365,68.460564,364.884613"
+	call move_to_next_waypoint "-743.817078,62.863625,420.417206"
 
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -198,53 +142,29 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
+	call Obj_OgreIH.Get_Chest
 }
 
+
 /**********************************************************************************************************
- 	Named 2 ********************    Move to, spawn and kill - Isos  ********************************
+ 	Named 2 ********************    Move to, spawn and kill - Tkesh'Tura  ********************************
 ***********************************************************************************************************/
 	
 function:bool Named2(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="262.198151,31.245022,58.916054"
+	variable point3f KillSpot="-548.669922,80.809341,686.019958"
 
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "2"
-	call move_to_next_waypoint "209.316299,31.504650,-0.151778"
-	call move_to_next_waypoint "210.761063,31.596615,-9.813629"
-    call move_to_next_waypoint "213.432541,31.245022,52.049480" 
-	wait 50
-	 call move_to_next_waypoint "224.365341,32.562355,45.469532"
-	oc !ci -special igw:${Me.Name}
-	wait 50
-
-	call move_to_next_waypoint "224.365341,32.562355,45.469532"
-	wait 50
-	oc !ci -special igw:${Me.Name}
-	wait 50
-
-	call move_to_next_waypoint "212.496948,31.245022,42.624424" 
-    call move_to_next_waypoint "213.071732,31.777447,10.870465" 
-	call move_to_next_waypoint "222.739456,31.504650,1.152017"
-	call move_to_next_waypoint "211.412064,31.438419,-26.274744"
-	call move_to_next_waypoint "214.244415,31.245022,-44.421112"
-	call move_to_next_waypoint "223.009338,32.181305,-44.738777"
-	oc !ci -special igw:${Me.Name}
-	wait 50
-	call move_to_next_waypoint "203.683121,32.214455,-44.644077"
-	oc !ci -special igw:${Me.Name}
-	wait 50
-    call move_to_next_waypoint "203.492325,32.222984,-44.860386"
-    call move_to_next_waypoint "218.625458,31.504650,-6.464325"
-	call move_to_next_waypoint "223.949478,31.504650,0.332479"
-	call move_to_next_waypoint "261.783325,31.504650,-1.642059"
-	call move_to_next_waypoint "261.654205,31.421638,-61.202709"
-    call move_to_next_waypoint "261.486786,31.797768,9.345303"
-	call move_to_next_waypoint "261.155304,31.449314,22.364616"
- 
-	
-	Ob_AutoTarget:AddActor["Isos",20,FALSE,TRUE]
+	call move_to_next_waypoint "-724.611267,59.297394,463.641052"
+	call move_to_next_waypoint "-741.148376,58.705959,507.457520"
+	call move_to_next_waypoint "-655.089783,61.819851,568.705017"
+	call move_to_next_waypoint "-622.185669,62.209690,621.610718"
+	call move_to_next_waypoint "-592.395874,74.911697,658.278381"
+	call move_to_next_waypoint "-569.801392,78.435776,671.573792"
+	call move_to_next_waypoint "-557.625000,79.690636,677.535522"
 ;	Check if already killed
+	wait 95
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 	{
 		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
@@ -264,39 +184,35 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
-	call move_to_next_waypoint "261.314362,31.816750,62.314568"
-	oc !ci -special igw:${Me.Name}
-	wait 50
+	call Obj_OgreIH.Get_Chest
 }
 
-
 /**********************************************************************************************************
- 	Named 3 *********************    Move to, spawn and kill -The Storm Mistress  ********************************
-	 
-
+ 	Named 3 *********************    Move to, spawn and kill - Kusala'Din ********************************
 ***********************************************************************************************************/
 	
 function:bool Named3(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="261.988464,31.245022,-48.247028"
-;	TODO ADD CAMPSPOT TO MOST RECENT LIGHTNING BOI
-	call HO "All"
+	variable point3f KillSpot="-1033.890991,180.289780,742.213379"
 
 ; 	Move to named and spawn
-    call move_to_next_waypoint "260.585815,31.982433,62.767784"
-    oc !ci -special igw:${Me.Name}
 	call initialise_move_to_next_boss "${_NamedNPC}" "3"
+	call move_to_next_waypoint "-614.552551,67.470222,641.079773"
+	call move_to_next_waypoint "-692.916748,70.719276,614.505615"
+	call move_to_next_waypoint "-760.458496,82.935600,618.922302"
 
-	call mend_and_rune_swap "stifle"
+	call move_to_next_waypoint "-789.190613,84.715439,620.502930"
 
-	call move_to_next_waypoint "261.636658,31.786743,-18.954660"
+	oc !c -pause 
 	oc !ci -special igw:${Me.Name}
+	wait 65
+	oc !c -resume All
+	call move_to_next_waypoint "-987.140015,170.550003,635.390015"
+	call move_to_next_waypoint "-1010.204224,176.603241,709.020874"
+	call move_to_next_waypoint "-1009.932678,176.591400,708.154663"
 
-	call HO "All"
-
-    Ob_AutoTarget:AddActor["Lightning Anchor",10,FALSE,TRUE]
-	Ob_AutoTarget:AddActor["The Storm Mistress",10,FALSE,TRUE]
-
+	call move_to_next_waypoint "-1013.450073,177.978073,734.003906"
+	
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 	{
@@ -317,137 +233,12 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 		return FALSE
 	}
 	return TRUE
-	call move_to_next_waypoint "263.070831,31.612640,-61.744865"
-	oc !c -special igw:${Me.Name}
-	wait 50
-}
-
-
-/**********************************************************************************************************
- 	Named 4 *********************    Move to, spawn and kill - Hezodhan ********************************
-***********************************************************************************************************/
-
-function:bool Named4(string _NamedNPC="Doesnotexist")
-{
-
-
-	call HO "All"
-
-    call move_to_next_waypoint "265.614044,31.245022,-61.440887"
-
-  	oc !ci -special igw:${Me.Name}
-
-	variable point3f KillSpot="438.740540,6.816512,-0.284076"
-
-; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "4"
-
-	call move_to_next_waypoint "261.123199,31.504650,0.623502"
-	call move_to_next_waypoint "280.255615,31.613644,-0.273382"
-      	oc !ci -special igw:${Me.Name}
-        wait 35
-
-	call move_to_next_waypoint "380.126831,3.510479,-12.840424"
-    call move_to_next_waypoint "401.180450,3.516983,0.296043"
-    call move_to_next_waypoint "401.180450,3.516983,0.296043"
-
-
-	Ob_AutoTarget:AddActor["Hezodhan",10,FALSE,TRUE]
-
-;	Check if already killed
-	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
-		return TRUE
-	}
-
-;	Kill named
-	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
-	{
-		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-	
-;	Check named is dead
-	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
-		return FALSE
-	}
-	return TRUE
-}
-
- /**********************************************************************************************************
- 	Named 5 *********************    Move to, spawn and kill - Ashnu + Sovereign dude ********************************
-	 
-	 			 ;kill adds or wipe
-				
-***********************************************************************************************************/
-
-	
-function:bool Named5(string _NamedNPC="Doesnotexist")
-{
-
-	call mend_and_rune_swap "fear"
-	wait 95
-	call HO "All"
-
-    call move_to_next_waypoint "612.219299,71.106140,-45.708889"
-  	oc !ci -special igw:${Me.Name}
-    wait 40
-
-	variable point3f KillSpot="438.740540,6.816512,-0.284076"
-
-; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "5"
-
-	call move_to_next_waypoint "367.322815,31.608864,-0.063050"
-	call move_to_next_waypoint "338.425751,31.492619,-0.661140"
-	call move_to_next_waypoint "331.130646,31.491600,-9.379161"
-    call move_to_next_waypoint "304.570740,31.491615,-7.727015"
-    call move_to_next_waypoint "397.374725,71.326294,-0.377002"
-
-    call move_to_next_waypoint "411.318085,71.326294,17.277493"
-    oc !ci -special igw:${Me.Name}
-    wait 15
-    call move_to_next_waypoint "506.010010,71.370003,17.629999"
-    call move_to_next_waypoint "522.697876,71.370186,16.471838"
-    call move_to_next_waypoint "602.011841,71.343628,0.576221"
-    call move_to_next_waypoint "601.322021,71.120644,-42.030811"
-     oc !ci -special igw:${Me.Name}
-    wait 150
-
-    call move_to_next_waypoint "602.447998,71.106018,-45.514637"
-
-	Ob_AutoTarget:AddActor["Zakir-Sar-Ussur",10,FALSE,TRUE]
-	Ob_AutoTarget:AddActor["Ashnu",10,FALSE,TRUE]
-
-;	Check if already killed
-	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
-		return TRUE
-	}
-
-;	Kill named
-	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
-	{
-		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-	
-;	Check named is dead
-	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
-	{
-		Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
-		return FALSE
-	}
-	return TRUE
-    
+	call Obj_OgreIH.Get_Chest
 }
 
 /**********************************************************************************************************
  	 **********************    Jobs done! ***********************************
 ***********************************************************************************************************/
-
 
 /***********************************************************************************************************
 ***********************************************  FUNCTIONS  ************************************************    
@@ -550,7 +341,7 @@ function move_to_next_waypoint(point3f waypoint, int ScanRadius)
 	Obj_OgreIH:ChangeCampSpot["${waypoint}"]
 	call Obj_OgreUtilities.HandleWaitForCampSpot 10
 	oc !ci -notarget ${Me.Name}
-	wait 10 
+	wait 10
 	if ${Me.InCombat}
 	{
 		call kill_trash
@@ -592,14 +383,14 @@ function kill_trash()
 	if (!${Obj_OgreIH.DuoMode} && !${Obj_OgreIH.SoloMode})
 	{
 		oc !ci -LetsGo igw:${Me.Name}+scout
-		oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+scout checkbox_settings_movemelee TRUE TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+scout checkbox_settings_movemelee FALSE FALSE
 	}
 	call Obj_OgreUtilities.HandleWaitForCombat
 	oc !ci -campspot igw:${Me.Name}
 	oc !ci -ChangeCampSpotWho igw:${Me.Name} ${Me.X} ${Me.Y} ${Me.Z}
 	call Obj_OgreUtilities.WaitWhileGroupMembersDead
 	call Obj_OgreUtilities.HandleWaitForGroupDistance 5
-	oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+scout checkbox_settings_movemelee FALSE TRUE
+	oc !ci -ChangeOgreBotUIOption igw:${Me.Name}+scout checkbox_settings_movemelee FALSE false
 	wait 10
 }
 
@@ -644,11 +435,9 @@ function Tank_n_Spank(string _NamedNPC, point3f KillSpot)
 	wait 50
 }
 
-
 function HO(string Mode)
 {
 	switch ${Mode}
-
 	{
 		case Disable
 			oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_ho_start FALSE TRUE
