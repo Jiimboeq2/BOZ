@@ -32,7 +32,7 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-		Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
+		call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"
 		
 			if !${Return}
 			{
