@@ -315,6 +315,8 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "147.388611,158.013550,18.199402"
 	call move_to_next_waypoint "146.557922,161.033279,25.217880"
 
+
+
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 	{
@@ -326,7 +328,18 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
 	{
 		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
+		
 	}
+
+;testing this over function call
+if ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]} || ${OgreBotAPI.DetrimentalInfo[909,315,${Me.ID},"exists"]}
+	
+    while ${Me.InCombat}==TRUE
+    {
+        oc ${Me.Name}: Intercept my Curse
+        oc !c -CastAbilityOnPlayer igw:${Me.Name} "Intercept" "${Me.Name}"
+        wait 40
+    }
 	
 ;	Check named is dead
 	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -336,6 +349,7 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	}
 	return TRUE
 }
+
 
 
 
@@ -427,6 +441,20 @@ function initialise_move_to_next_boss(string _NamedNPC, int startpoint)
 		eq2execute merc backoff
 	}
 }
+
+
+;Will have to work out pr
+
+if ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
+	
+    while ${Me.InCombat}==TRUE
+   if ${OgreBotAPI.DetrimentalInfo[909,315,${Me.ID},"exists"]}
+    {
+        oc ${Me.Name}: Intercept my Curse
+        oc !c -CastAbilityOnPlayer igw:${Me.Name} "Intercept" "${Me.Name}"
+        wait 40
+    }
+
 
 function move_to_next_waypoint(point3f waypoint, int ScanRadius)
 {
