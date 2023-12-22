@@ -12,6 +12,6 @@ Move the profiles to C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreBot\Save a
 
 OR
 
-C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreBot\Save\ProfilesToImport. > check admin tab (refresh first) search for it in that tab and hit load , then should be in your drop down
+C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreBot\Save\ProfilesToImport   > check admin tab (refresh first) search for it in that tab and hit load , then should be in your drop down
 
 For Temp Adorns, go to C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreCommon\OgreTempAdorns.
