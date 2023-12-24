@@ -1,7 +1,6 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
-;variable string Solo_Zone_Name="Splendor Sky Aerie: Marshlands Miasma [Solo]"
-variable string Heroic_Zone_Name="Iceshard Keep"
+variable string Zone_Name = "Iceshard Keep"
 ;variable string Heroic_2_Zone_Name="X"
 variable int DefaultScanRadius="40"
 variable int ShiniesLooted="0"
@@ -106,14 +105,14 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 {
 	variable point3f KillSpot="-563.966003,73.429100,-24.562864"
 
-
+	call initialise_move_to_next_boss "${_NamedNPC}" "1"
+	
 oc !c -UseItem ${Me.Name} "Chrono Dungeons: [Level 130]"
 wait 65
 ChoiceWindow:DoChoice1
 wait 15
 
-	call initialise_move_to_next_boss "${_NamedNPC}" "1"
-
+	call move_to_next_waypoint "-564.249023,74.918709,-11.899443"
 	call move_to_next_waypoint "-564.665222,84.839134,31.384501"
 
 
