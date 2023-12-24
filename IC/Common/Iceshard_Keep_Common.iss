@@ -67,10 +67,10 @@ objectdef Object_Instance
 ; 	Enter name and shinies nav point for Named 2.				
 		if ${_StartingPoint} == 2
 		{
-			call This.Named2 "Praetor Dickface"
+			call This.Named2 will have to get named"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#2: Praetor Dickface"]
+				Obj_OgreIH:Message_FailedZone["#2: will have to get named"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
