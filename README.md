@@ -15,3 +15,9 @@ OR
 C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreBot\Save\ProfilesToImport   > check admin tab (refresh first) search for it in that tab and hit load , then should be in your drop down
 
 For Temp Adorns, go to C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreCommon\OgreTempAdorns.
+
+
+
+precast tag button
+
+Obj_OgreMCP:PasteButton[RawCommand,Pre-Pull,oc,!c,-AbilityTag,AUTO,PreCastTag,20,Allow,AUTO]
