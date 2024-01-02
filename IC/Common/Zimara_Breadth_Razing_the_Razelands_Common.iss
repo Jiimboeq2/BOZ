@@ -342,12 +342,12 @@ call CheckIntercept
 }
 }
 
-
 ; Check if named is dead
 if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 {
     Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
     return FALSE
+	oc  ********    Jobs done! ********
 }
 }
 }
