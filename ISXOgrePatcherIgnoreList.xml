@@ -1,0 +1,160 @@
+<?xml version="1.0" ?>
+<Manifest>
+  <!-- Add entries starting from the /innerspace/ folder. 
+  For example, if you wanted to IGNORE the fake file inside of EQ2OgreCommon/OgreHireling/FakeFile.iss
+  Your entry would be:
+  -->
+    <FileInfo>
+        <filename>EQ2OgreCommon/OgreHireling/FakeFile.iss</filename>
+     <donotoverwrite>1</donotoverwrite>
+    </FileInfo>
+  <!-- Likewise, if you wanted to set a do not over write on the file:
+  MCP/FakeFile2.xml
+  Your entry would be:
+  -->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2buttontexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+  -->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2buttontexturehover.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+  -->
+   <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2buttontexturepressed.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+  -->
+   <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2windowtextureframe.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+  -->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2windowtextureframe.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+  -->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2tabcontroltabtextureframe.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo> 
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2windowtitlebartextureframe.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>  
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2listboxtexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2combolistboxtexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2gaugetexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2gaugetexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2sliderhandletexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2scrollbarsliderhandletexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Warlock_Ele_OT.xml</filename>
+       <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Brigand_Tha_OT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Coercer_Eth_MT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Defiler_Eth_MT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Dirge_Geo_MT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Fury_Eth_OT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Guardian_Tha_MT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Illusionist_Eth_OT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Mystic_Geo_OT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Swashbuckler_Ele_MT.xml</filename>
+    <ignore>1</ignore>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Templar_Geo_MT.xml</filename>
+    <ignore>1</ignore>>
+</FileInfo>
+-->
+<FileInfo>
+    <filename>Scripts/EQ2OgreBot/Save/ProfilesToImport/EQ2Save_Sample_Troubador_Geo_OT.xml</filename>
+    <ignore>1</ignore>>
+</FileInfo>
+-->
+
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2scrollbarslidertexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2slidertexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2tabcontroltabtexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>
+-->
+  <FileInfo>
+    <filename>Interface/Skins/EQ2Ogre/Images/eq2comboboxtexture.png</filename>
+    <donotoverwrite>1</donotoverwrite>
+  </FileInfo>             
+</Manifest>
