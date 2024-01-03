@@ -21,3 +21,7 @@ For Temp Adorns, go to C:\Program Files (x86)\InnerSpace\Scripts\EQ2OgreCommon\O
 precast tag button
 
 Obj_OgreMCP:PasteButton[RawCommand,Pre-Pull,oc,!c,-AbilityTag,AUTO,PreCastTag,20,Allow,AUTO]
+
+
+For patcher ignore list simply add it to 
+C:\Program Files (x86)\InnerSpace\Extensions , or where ever your extensions folder is , not x64.
