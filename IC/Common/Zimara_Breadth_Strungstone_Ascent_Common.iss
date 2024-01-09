@@ -91,7 +91,7 @@ objectdef Object_Instance
 
 		if ${_StartingPoint} == 4
 		{
-			call This.Named3 "Crisj'Jen the Bold"
+			call This.Named4 "Crisj'Jen the Bold"
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone["#4: Crisj'Jen the Bold"]
@@ -105,7 +105,7 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 5
 		{
-			call This.Named3 "Crisj'Jen the Bold"
+			call This.Named5 "Fuejenyrus"
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone["#5: Fuejenyrus"]
@@ -146,7 +146,7 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 	call initialise_move_to_next_boss "${_NamedNPC}" "1"
 	call move_to_next_waypoint "617.731567,201.674240,-766.535828"
 	call move_to_next_waypoint "614.272583,195.113831,-684.101135"
-	call move_to_next_waypoint "626.118164,206.762344,-572.387146"
+	call move_to_next_waypoint "629.517395,206.511765,-560.547363"
 
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -184,7 +184,7 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "625.949341,206.747116,-569.715088"
 	call move_to_next_waypoint "647.985779,207.478333,-464.141602"
 
-
+	wait 5
 	oc !ci -special igw:${Me.Name}
 	wait 35
 
@@ -224,7 +224,7 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 	
 function:bool Named3(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="527.436523,284.165863,554.137573"
+	variable point3f KillSpot="528.28 283.90 553.17"
 
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "3"
@@ -240,7 +240,6 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "691.190247,292.675354,520.994080"
 	call move_to_next_waypoint "692.309937,277.094482,487.822662"
 	call move_to_next_waypoint "700.247437,284.064484,472.898254"
-	call move_to_next_waypoint "717.776428,286.716827,480.536743"
 	call move_to_next_waypoint "717.447937,287.117676,497.626862"
 	call move_to_next_waypoint "626.729126,281.829041,553.989624"
 	call move_to_next_waypoint "583.938843,271.840851,543.145752"
@@ -277,26 +276,33 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 ***********************************************************************************************************/
 function:bool Named4(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="87.784958,385.899536,740.259766"
+	variable point3f KillSpot="113.925377,373.424347,704.549866"
 
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "4"
-	call move_to_next_waypoint "475.058960,307.776306,606.338989"
-	call move_to_next_waypoint "526.540222,284.453308,555.244324"
-	call move_to_next_waypoint "457.700165,315.776825,618.363708"
-	call move_to_next_waypoint "408.605652,333.213562,628.416626"
-	call move_to_next_waypoint "377.349304,349.788025,604.117981"
-	call move_to_next_waypoint "373.374756,360.436951,569.388245"
-	call move_to_next_waypoint "377.481934,366.617554,542.506714"
-	call move_to_next_waypoint "427.963776,380.668121,552.264771"
-	call move_to_next_waypoint "422.493256,382.447754,578.354370"
-	call move_to_next_waypoint "344.552277,402.069672,598.133850"
+	call move_to_next_waypoint "543.17,275.20,602.56"
+	call move_to_next_waypoint "509.40,281.13,660.10"
+	call move_to_next_waypoint "532.92,277.50,620.83"
+	call move_to_next_waypoint "554.84,275.13,566.50"
+	call move_to_next_waypoint "526.70,284.40,554.95"
+	call move_to_next_waypoint "473.71,308.70,607.87"
+	call move_to_next_waypoint "423.02,327.75,627.47"
+	call move_to_next_waypoint "388.84,344.09,613.56"
+	call move_to_next_waypoint "371.13,360.66,568.47"
+	call move_to_next_waypoint "399.95,370.91,544.34"
+	call move_to_next_waypoint "430.61,380.89,556.50"
+	call move_to_next_waypoint "427.30,382.40,576.35"
+	call move_to_next_waypoint "409.69,384.76,579.94"
+	call move_to_next_waypoint "343.71,402.33,597.42"
+	wait 5
 	oc !ci -special igw:${Me.Name}
 	wait 35
 
 	call move_to_next_waypoint "153.581924,362.173767,677.004272"
 	call move_to_next_waypoint "113.925377,373.424347,704.549866"
+	call move_to_next_waypoint "100.453194,379.593384,712.673706"
 
+	wait 5
 	oc !ci -special igw:${Me.Name}
 	wait 15
 	
@@ -334,20 +340,22 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "5"
-	call move_to_next_waypoint "86.251961,383.471191,716.492859"
-	call move_to_next_waypoint "36.495789,401.245605,738.729919"
-	call move_to_next_waypoint "3.984146,400.855133,738.063049"
-	call move_to_next_waypoint "-28.816317,388.277222,724.033142"
-	call move_to_next_waypoint "-54.215366,387.297760,707.810242"
-	call move_to_next_waypoint "-75.067734,395.824982,718.855286"
-	call move_to_next_waypoint "-105.456184,408.455780,758.222412"
-	call move_to_next_waypoint "-148.031784,415.467682,793.469543"
-	call move_to_next_waypoint "-187.076035,405.764862,825.626038"
-
-	call move_to_next_waypoint "-178.590668,407.085876,867.519836"
-	call move_to_next_waypoint "-203.464050,425.975983,904.580383"
-	call move_to_next_waypoint "-224.726120,431.921844,893.231750"
-	call move_to_next_waypoint "-242.091293,432.775757,870.087341"
+	call move_to_next_waypoint "101.88, 378.80, 661.03"
+	call move_to_next_waypoint "94.13,382.59,717.34"
+	call move_to_next_waypoint "56.99,397.51,733.71"
+	call move_to_next_waypoint "39.32,400.98,738.67"
+	call move_to_next_waypoint "15.74,402.28,738.02"
+	call move_to_next_waypoint "-2.75,399.69,736.93"
+	call move_to_next_waypoint "-31.40,387.93,722.42"
+	call move_to_next_waypoint "-49.24,386.26,709.85"
+	call move_to_next_waypoint "-70.23,394.22,719.01"
+	call move_to_next_waypoint "-84.30,401.01,726.87"
+	call move_to_next_waypoint "-100.17, 407.37,753.35"
+	call move_to_next_waypoint "-135.71, 416.33,784.87"
+	call move_to_next_waypoint "-173.11, 405.92,813.93"
+	call move_to_next_waypoint "-180.15, 407.23,865.69"
+	call move_to_next_waypoint "-201.76, 423.60,900.33"
+	call move_to_next_waypoint "-214.91, 430.43,899.87"
 	
 	
 ;	Check if already killed

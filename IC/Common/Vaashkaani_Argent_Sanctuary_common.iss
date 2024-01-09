@@ -32,7 +32,7 @@ objectdef Object_Instance
 		
 		if ${_StartingPoint} == 0
 		{
-	call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"		
+			call Obj_OgreIH.ZoneNavigation.GetIntoZone "${sZoneName}"		
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone
@@ -62,25 +62,26 @@ objectdef Object_Instance
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-; 	Enter name and shinies nav point for Named 2.
+; 	Enter name and shinies nav point for Named 2.			
 		if ${_StartingPoint} == 2
 		{
-			call This.Named2 "Nerjehl Khaneh"
+			call This.Named2 "Akharys"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#2: Nerjehl Khaneh"]
+				Obj_OgreIH:Message_FailedZone["#2: Akharys"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-; 	Enter name and shinies nav point for Named 3.				
+; 	Enter name and shinies nav point for Named 3.
+
 		if ${_StartingPoint} == 3
 		{
-			call This.Named3 "Akharys"
+			call This.Named3 "Uah'Lu the Unhallowed"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#3: Akharys"]
+				Obj_OgreIH:Message_FailedZone["#3: Uah'Lu the Unhallowed"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
@@ -91,7 +92,7 @@ objectdef Object_Instance
 		; 	Enter name and shinies nav point for Named 4.
 		if ${_StartingPoint} == 4
 		{
-			call This.Named2 "Xuxuquaxul"
+			call This.Named4 "Xuxuquaxul"
 			if !${Return}
 			{
 				Obj_OgreIH:Message_FailedZone["#4: Xuxuquaxul"]
@@ -104,10 +105,10 @@ objectdef Object_Instance
 ; 	Enter name and shinies nav point for Named 5.				
 		if ${_StartingPoint} == 5
 		{
-			call This.Named3 "General Ra'Zaa"
+			call This.Named5 "General Ra'Zaal"
 			if !${Return}
 			{
-				Obj_OgreIH:Message_FailedZone["#5: General Ra'Zaa"]
+				Obj_OgreIH:Message_FailedZone["#5: General Ra'Zaal"]
 				return FALSE
 			}
 			call Obj_OgreIH.Get_Chest
@@ -140,12 +141,12 @@ objectdef Object_Instance
 		;is the chicken script even needed?  -- it didnt seem to do any thing.
 
 /**********************************************************************************************************
-    Named 1 **********************    Move to, spawn and kill - Tazir Tanziri  ********************************
+    Named 1 ******************    Move to, spawn and kill - Tazir Tanziri  ********************************
 ***********************************************************************************************************/
 
 function:bool Named1(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="66.784668,3.533128,-1.610426"
+	variable point3f KillSpot="99.71,3.53,-0.06"
 
 ; 	Move to named and spawn
 	echo ${Me.Equipment[primary].ToItemInfo.Condition}
@@ -155,21 +156,85 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 		call mend_and_rune_swap "stun"
 	}
 	call initialise_move_to_next_boss "${_NamedNPC}" "1"
-	call move_to_next_waypoint "-54.846382,3.027271,3.064041"
-	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
-	call move_to_next_waypoint "-17.897356,2.956258,-47.571098"
+	call move_to_next_waypoint "-75.22,3.61,0.26"
+	call move_to_next_waypoint "-46.65,3.03,-16.65"
+	call move_to_next_waypoint "-27.89,3.13,-28.40"
+	call move_to_next_waypoint "-10.72,3.01,-33.76"
+	call move_to_next_waypoint "18.10,2.96,-28.93"
+	call move_to_next_waypoint "28.23,3.49,-27.27"
+	call move_to_next_waypoint "45.53,3.50,-14.37"
+	call move_to_next_waypoint "54.11,3.53,-2.26"
+	call move_to_next_waypoint "80.66,3.53,-0.31"
 
-	call move_to_next_waypoint "-62.177113,3.027377,-15.457197"
-	call move_to_next_waypoint "-32.259029,2.955953,44.273453"
-
-	call move_to_next_waypoint "11.923247,2.956032,33.528576"
-	call move_to_next_waypoint "21.517860,3.459791,28.045519"
-	call move_to_next_waypoint "38.942612,3.483267,27.252882"
-	call move_to_next_waypoint "50.410225,3.533128,-0.968265"
-
-	Ob_AutoTarget:AddActor["a silver shard",50,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["a silver shard",100,FALSE,TRUE]
 	Ob_AutoTarget:AddActor["Tazir Tanziri",50,FALSE,TRUE]
 
+;	Check if already killed
+	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	{
+		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
+		return TRUE
+	}
+
+;	Kill named
+	Obj_OgreIH:AutoTarget_SetScanRadius[100]
+	Actor[Query,Name=="Tazir Tanziri"]:DoTarget
+	Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 1
+	wait 10
+	Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+	oc ${Me.Name} is pulling ${_NamedNPC}
+	wait 50
+	while ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	{
+		while ${Actor[Query,Name=="a silver shard"].ID(exists)} 
+		{
+			Actor[Query,Name=="a silver shard"]:DoTarget
+			Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="a silver shard" && Distance > 15].ID}"]
+			call Obj_OgreUtilities.HandleWaitForCampSpot 1
+			oc !ci -CS_Set_Formation_Circle igw:${Me.Name}+NotFighter 7 ${Me.X} ${Me.Y} ${Me.Z}
+			wait 10
+		}
+		Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+		call Obj_OgreUtilities.HandleWaitForCampSpot 1
+		if ${Actor[Query,Name=="${_NamedNPC}" && Distance > 25](exists)}
+		{
+			Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="${_NamedNPC}"].ID}"]
+			call Obj_OgreUtilities.HandleWaitForCampSpot 1
+		}
+		wait 10
+	}
+	
+;	Check named is dead
+	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	{
+		Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
+		return FALSE
+	}
+	return TRUE
+}
+
+/**********************************************************************************************************
+ 	Named 2 *************    Move to, spawn and kill - Sansobog + Akharys  ********************************
+***********************************************************************************************************/
+	
+function:bool Named2(string _NamedNPC="Doesnotexist")
+{
+	variable point3f KillSpot="213.794464,3.451207,57.732517"
+
+; 	Move to named and spawn
+	call initialise_move_to_next_boss "${_NamedNPC}" "2"
+	call move_to_next_waypoint "112.694412,3.533185,-1.904541"
+	call move_to_next_waypoint "140.268066,3.533128,0.657942"
+	call move_to_next_waypoint "164.962845,3.755733,0.256476"
+	call move_to_next_waypoint "168.011673,3.755733,20.326904"
+	call move_to_next_waypoint "176.874268,3.755733,20.621941"
+	call move_to_next_waypoint "189.234619,3.750598,0.261821"
+	call move_to_next_waypoint "214.373856,3.457151,0.076444"
+	call move_to_next_waypoint "213.926468,3.451166,42.877728"
+
+	Ob_AutoTarget:AddActor["Sansobog",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["Akharys",20,FALSE,TRUE]
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 	{
@@ -193,27 +258,22 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 }
 
 /**********************************************************************************************************
- 	Named 2 ********************    Move to, spawn and kill - Sansobog + Akharys  ********************************
+ 	Named 3 **********    Move to, spawn and kill - Uah'Lu the Unhallowed  ********************************
 ***********************************************************************************************************/
 	
-function:bool Named2(string _NamedNPC="Doesnotexist")
+function:bool Named3(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="209.049484,3.451219,64.023865"
+	variable point3f KillSpot="262.723999,3.451161,-44.062378"
 
 ; 	Move to named and spawn
-	call initialise_move_to_next_boss "${_NamedNPC}" "2"
-	call move_to_next_waypoint "112.694412,3.533185,-1.904541"
-	call move_to_next_waypoint "140.268066,3.533128,0.657942"
-	call move_to_next_waypoint "164.962845,3.755733,0.256476"
-	call move_to_next_waypoint "165.644470,3.755733,22.421480"
-	call move_to_next_waypoint "178.690247,3.755733,21.559664"
-	call move_to_next_waypoint "187.586105,3.750598,-0.263154"
-	call move_to_next_waypoint "216.058563,3.457151,0.467545"
-	call move_to_next_waypoint "165.644470,3.755733,22.421480"
-	call move_to_next_waypoint "206.131226,3.451278,40.215874"
+	call initialise_move_to_next_boss "${_NamedNPC}" "3"
+	call move_to_next_waypoint "213.794464,3.451207,57.732517"
+	call move_to_next_waypoint "214.363159,3.457150,-0.438490"
+	call move_to_next_waypoint "255.721802,3.457150,-0.367512"
+	call move_to_next_waypoint "263.713379,3.451005,-22.190277"
 
-	Ob_AutoTarget:AddActor["Sansobog",20,FALSE,TRUE]
-	Ob_AutoTarget:AddActor["Akharys",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["a fallen",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["Uah'Lu the Unhallowed",20,FALSE,TRUE]
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 	{
@@ -246,12 +306,13 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 {
 	variable point3f KillSpot="88.594643,11.429982,-185.822891"
 
-
 ; 	Move to named and spawn
 	call initialise_move_to_next_boss "${_NamedNPC}" "4"
-	call move_to_next_waypoint "271.272919,3.457151,0.382003"
-	call move_to_next_waypoint "294.351379,3.542952,-0.172344"
-	oc !ci -special igw:${Me.Name}
+	call move_to_next_waypoint "262.789215,3.744644,-16.424225"
+	call move_to_next_waypoint "276.530853,3.454931,-0.844003"
+	call move_to_next_waypoint "295.983673,3.645917,0.096400"
+	wait 5
+	Actor["portal_to_aviary"]:DoubleClick
 	wait 25
 
 	call mend_and_rune_swap "stun"
@@ -259,9 +320,10 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 	wait 95
 
 	call move_to_next_waypoint "-56.669998,26.580000,-247.220001"
+	call move_to_next_waypoint "-18.168152,11.883893,-247.220001"
 	call move_to_next_waypoint "65.216095,11.784368,-199.326691"
 
-		Ob_AutoTarget:AddActor["Xuxuquaxul",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["Xuxuquaxul",20,FALSE,TRUE]
 
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -287,7 +349,7 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 
 
 /**********************************************************************************************************
- 	Named 5 *********************    Move to, spawn and kill - General Ra'Zaa ********************************
+ 	Named 5 ******************    Move to, spawn and kill - General Ra'Zaal ********************************
 	 
 	 			 ;kill adds or wipe
 				; TODO call HO's and use on adds other wise they repop
@@ -305,9 +367,36 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "82.233963,7.944616,-300.831512"
 	call move_to_next_waypoint "99.749557,7.944616,-305.060638"
 
+	call HO "All"
+	wait 20
+	
+	call move_to_next_waypoint "82.233963,7.944616,-300.831512"
+	call move_to_next_waypoint "99.749557,7.944616,-305.060638"
+
+	wait 10
+	Actor[Query,Name=="General Ra'Zaal"]:DoTarget
+	while ${Actor[Query,Name=="General Ra'Zaal"].Distance} > 5
+	{
+		Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="General Ra'Zaal"].ID}"]
+		wait 5
+		Actor[Query,Name=="General Ra'Zaal"]:Hail
+	}
+	Actor[Query,Name=="General Ra'Zaal"]:DoubleClick
+	Obj_OgreIH:ChangeCampSpot["${SoloKillSpot}"]
+	while ${Actor[Query, Name=="${_NamedNPC}" && Type=="NoKill NPC"].ID(exists)}
+	{
+		wait 20
+		
+		Actor[Query, Name == "General Ra'Zaal" && Type == "NoKill NPC"]:Hail
+		Actor[Query, Name == "General Ra'Zaal" && Type == "NoKill NPC"]:DoubleClick
+	}
+	
+	call move_to_next_waypoint "82.233963,7.944616,-300.831512"
+	Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="${_NamedNPC}"].ID}"]
+	wait 50
 
 	Ob_AutoTarget:AddActor["Ra'Zaal's ghul",20,FALSE,TRUE]
-	Ob_AutoTarget:AddActor["General Ra'Zaa",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["General Ra'Zaal",20,FALSE,TRUE]
 
 ;	Check if already killed
 	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
@@ -319,6 +408,7 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 ;	Kill named
 	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
 	{
+		call HO "All"
 		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
 	}
 	
