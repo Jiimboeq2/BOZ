@@ -234,7 +234,6 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "47.598545,144.789001,-272.262054"
 	call move_to_next_waypoint "91.890930,145.275620,-299.213867"
 	call move_to_next_waypoint "88.179649,148.760986,-305.407745"
-	call move_to_next_waypoint "79.823105,149.739700,-320.016785"
 	Ob_AutoTarget:AddActor["Sina A'rak",50,FALSE,TRUE]
 
 ;	Check if already killed
@@ -276,7 +275,6 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 	call move_to_next_waypoint "16.904150,139.838852,-92.498856"
 	call move_to_next_waypoint "4.319942,145.992584,-58.870403"
 	call move_to_next_waypoint "-11.311839,154.361435,-12.076102"
-	call move_to_next_waypoint "-33.205685,156.778595,7.207820"
 	Ob_AutoTarget:AddActor["Doda K'Bael",50,FALSE,TRUE]
 	wait 15
 ; Check if already killed
@@ -290,7 +288,8 @@ if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
 if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_2_Zone_Name}"]}
 {
     call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	while ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	while ${Actor[namednpc,"${_NamedNPC}"].ID(exists)
+}
 {
 call CheckIntercept
 }
