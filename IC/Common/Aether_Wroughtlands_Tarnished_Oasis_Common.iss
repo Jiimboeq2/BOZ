@@ -7,7 +7,8 @@
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
 variable string Solo_Zone_Name="Aether Wroughtlands: Tarnished Oasis [Solo]"
-variable string Heroic_1_Zone_Name="Aether Wroughtlands: Tarnished Oasis [Event Heroic I]"
+variable string Heroic_1_Zone_Name="Aether Wroughtlands: Tarnished Oasis [Heroic I]"
+variable string Heroic_2_Zone_Name="Aether Wroughtlands: Tarnished Oasis [Heroic II]"
 variable string Named1="Farzun the Forerunner"
 variable string Named2="Tarsisk the Tainted"
 variable string Named3="Cragnok"
@@ -21,7 +22,7 @@ variable int ShiniesLooted="0"
 
 function main(int _StartingPoint=0, ... Args)
 {
-	call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
+call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
 }
 atom atexit()
 {
@@ -31,6 +32,7 @@ atom atexit()
 	oc !ci -LetsGo igw:${Me.Name}
 	call Obj_Kord.HO "Disable" TRUE
 	echo ${Time}: ${Script.Filename} done
+	oc !ci -ChangeOgreBotUIOption ${Me.Name} checkbox_autotarget_outofcombatscanning FALSE
 }
 objectdef Object_Instance
 {
@@ -154,67 +156,71 @@ objectdef Object_Instance
 	}
 
 /**********************************************************************************************************
-    Named 1 **********************    Move to, spawn and kill - Farzun the Forerunner    *******************************
+    Named 1 **********************    Move to, spawn and kill - Farzun the Forerunner  ********************
 ***********************************************************************************************************/
 
 function:bool Named1(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="-549.99, 38.77, -651.47"
+	variable point3f PullSpot="-600.790710,35.022583,-673.571289"
+	variable point3f KillSpot="-625.263123,35.796368,-698.473145b"
+	variable point3f OrbKillSpot1="-558.750977,49.863567,-603.987061"
+	variable point3f OrbKillSpot2="-542.140625,45.647732,-651.164734"
+	variable point3f OrbKillSpot3="-523.534607,43.257080,-694.541443"
+	variable point3f OrbKillSpot4="-588.248901,45.559025,-634.930969"
+	variable point3f OrbKillSpot5="-625.767212,42.549217,-611.617676"
+	variable point3f OrbKillSpot6="-638.446167,34.658066,-645.734253"
+	
+	Ob_AutoTarget:AddActor["an ill-invoked idea",0,FALSE,FALSE]
+	Ob_AutoTarget:AddActor["Forerunner's Blink Buoy",0,FALSE,FALSE]
+	Ob_AutoTarget:AddActor["${_NamedNPC}",0,FALSE,FALSE]
+	oc !ci -ChangeOgreBotUIOption ${Me.Name} checkbox_autotarget_outofcombatscanning TRUE
 
 ; 	Move to named and spawn
-;	call Obj_Kord.Mend_and_rune_swap "stun"
+	call Obj_Kord.HO "Scout"
 	call Obj_Kord.Initialise_move_to_next_boss "${_NamedNPC}" "1"
-	call Obj_Kord.Move_to_next_waypoint "-327.56, 58.41, -194.52"
-	call Obj_Kord.Move_to_next_waypoint "-378.35, 59.04, -245.34"
-	call Obj_Kord.Move_to_next_waypoint "-425.01, 55.57, -292.01"
-	call Obj_Kord.Move_to_next_waypoint "-428.18, 54.19, -315.43"
-	call Obj_Kord.Move_to_next_waypoint "-408.79, 56.97, -339.01"
-	call Obj_Kord.Move_to_next_waypoint "-389.35, 55.05, -360.42"
-	call Obj_Kord.Move_to_next_waypoint "-378.57, 54.54, -375.26"
-	call Obj_Kord.Move_to_next_waypoint "-388.70, 52.31, -404.95"
-	call Obj_Kord.Move_to_next_waypoint "-402.59, 54.99, -437.57"
-	call Obj_Kord.Move_to_next_waypoint "-418.56, 52.81, -487.28"
-	call Obj_Kord.Move_to_next_waypoint "-425.45, 56.06, -519.62"
-	call Obj_Kord.Move_to_next_waypoint "-442.16, 57.88, -538.55"
-	call Obj_Kord.Move_to_next_waypoint "-464.75, 57.78, -565.04"
-	call Obj_Kord.Move_to_next_waypoint "-480.09, 52.85, -578.77"
-	call Obj_Kord.Move_to_next_waypoint "-497.69, 52.04, -594.66"
-	call Obj_Kord.Move_to_next_waypoint "-514.20, 47.33, -605.28"
-	call Obj_Kord.Move_to_next_waypoint "-534.16, 46.33, -621.04"
-	call Obj_Kord.Move_to_next_waypoint "-550.94, 42.80, -636.09"
-	call Obj_Kord.Move_to_next_waypoint "-597.16, 35.02, -676.41"
-	call Obj_Kord.Move_to_next_waypoint "-549.99, 38.77, -651.47"
-
-	Ob_AutoTarget:AddActor["Forerunner's Blink Buoy",0,FALSE,FALSE]
-
-
+	call Obj_Kord.Move_to_next_waypoint "-353.484741,61.921059,-219.339050"
+	call Obj_Kord.Move_to_next_waypoint "-398.647949,57.534576,-266.323975"
+	call Obj_Kord.Move_to_next_waypoint "-421.242981,54.004288,-313.577545"
+	call Obj_Kord.Move_to_next_waypoint "-388.095032,56.676113,-382.240662"
+	call Obj_Kord.Move_to_next_waypoint "-397.676453,52.853859,-442.100647  "
+	call Obj_Kord.Move_to_next_waypoint "-412.755157,55.318192,-510.127899"
+	call Obj_Kord.Move_to_next_waypoint "-457.571075,57.882290,-562.004822"
+	call Obj_Kord.Move_to_next_waypoint "-500.442627,51.456875,-587.875854"
+	call Kill_Orb "${OrbKillSpot1}"
+	call Kill_Orb "${OrbKillSpot2}"
+	Obj_OgreIH:ChangeCampSpot["-538.093933,43.148399,-673.418152"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	call Kill_Orb "${OrbKillSpot3}"
+	Obj_OgreIH:ChangeCampSpot["-577.822754,37.024632,-665.722168"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	call Kill_Orb "${OrbKillSpot4}"
+	Obj_OgreIH:ChangeCampSpot["-616.503784,40.452366,-632.232605"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	call Kill_Orb "${OrbKillSpot5}"
+	Obj_OgreIH:ChangeCampSpot["-616.088928,40.443218,-634.683716"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	call Kill_Orb "${OrbKillSpot6}"
+	Obj_OgreIH:ChangeCampSpot["${PullSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	oc !ci -PetOff igw:${Me.Name}
 ;	Check if already killed
 	if !${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
 	{
 		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
 		return TRUE
 	}
-
 ;	Kill named
-	if ${OgreBotAPI.ZoneName.Equal["${Solo_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_1_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_2_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_3_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
+	oc !ci -SetUpFor igw:${Me.Name}
+	oc ${Me.Name} is pulling ${_NamedNPC}
+	Actor["${_NamedNPC}"]:DoTarget
+	wait 50
+	Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	oc !ci -PetAssist igw:${Me.Name}
+	Actor["${_NamedNPC}"]:DoTarget
+	call Obj_OgreUtilities.HandleWaitForCombat
+	call Obj_OgreUtilities.WaitWhileGroupMembersDead
+	wait 50
 	
 ;	Check named is dead
 	if ${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -226,25 +232,19 @@ function:bool Named1(string _NamedNPC="Doesnotexist")
 }
 
 /**********************************************************************************************************
- 	Named 2 *****************    Move to, spawn and kill - Tarsisk the Tainted  ************************
+ 	Named 2 ********************    Move to, spawn and kill - Tarsisk the Tainted *************************
 ***********************************************************************************************************/
 	
 function:bool Named2(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="-557.80, 52.66, -466.08"
-;	Ob_AutoTarget:AddActor["",0,FALSE,FALSE]
+	variable point3f KillSpot="-558.407959,52.748043,-431.931244"
+	Ob_AutoTarget:AddActor["corrupted roots",0,FALSE,FALSE]
 
 ; 	Move to named and spawn
 	call Obj_Kord.Initialise_move_to_next_boss "${_NamedNPC}" "2"
-	call Obj_Kord.Move_to_next_waypoint "-619.30, 35.80, -691.01"
-	call Obj_Kord.Move_to_next_waypoint "-597.78, 35.02, -675.16"
-	call Obj_Kord.Move_to_next_waypoint "-586.88, 45.07, -630.51"
-	call Obj_Kord.Move_to_next_waypoint "-583.61, 46.82, -587.42"
-	call Obj_Kord.Move_to_next_waypoint "-578.58, 47.73, -547.40"
-	call Obj_Kord.Move_to_next_waypoint "-568.25, 50.94, -512.05"
-	call Obj_Kord.Move_to_next_waypoint "-557.80, 52.66, -466.08"
-
-	Ob_AutoTarget:AddActor["corrupted roots",0,FALSE,FALSE]
+	call Obj_Kord.Move_to_next_waypoint "-600.790710,35.022583,-673.571289"
+	call Obj_Kord.Move_to_next_waypoint "-588.308594,45.236431,-586.467896"
+	call Obj_Kord.Move_to_next_waypoint "-563.363464,50.944668,-504.484528"
 
 ;	Check if already killed
 	if !${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -284,26 +284,22 @@ function:bool Named2(string _NamedNPC="Doesnotexist")
 }
 
 /**********************************************************************************************************
- 	Named 3 *********************    Move to, spawn and kill - Cragnok  ********************************
+ 	Named 3 *************************    Move to, spawn and kill - Cragnok ********************************
 ***********************************************************************************************************/
 	
 function:bool Named3(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="-525.31, 53.82, -198.59"
+	variable point3f KillSpot="-558.610535,52.812187,-181.143875"
 ;	Ob_AutoTarget:AddActor["",0,FALSE,FALSE]
 
 ; 	Move to named and spawn
 	call Obj_Kord.Initialise_move_to_next_boss "${_NamedNPC}" "3"
-	call Obj_Kord.Move_to_next_waypoint "-557.35, 52.50, -466.88"
-	call Obj_Kord.Move_to_next_waypoint "-557.13, 52.70, -425.15"
-	call Obj_Kord.Move_to_next_waypoint "-557.13, 52.70, -425.15"
-	call Obj_Kord.Move_to_next_waypoint "-543.19, 54.04, -412.80"
-	call Obj_Kord.Move_to_next_waypoint "-498.23, 56.28, -368.38"
-	call Obj_Kord.Move_to_next_waypoint "-477.47, 56.29, -340.78"
-	call Obj_Kord.Move_to_next_waypoint "-508.20, 59.77, -308.79"
-	call Obj_Kord.Move_to_next_waypoint "-544.24, 55.57, -278.59"
-	call Obj_Kord.Move_to_next_waypoint "-532.62, 53.84, -243.94"
-	call Obj_Kord.Move_to_next_waypoint "-525.31, 53.82, -198.59"
+	call Obj_Kord.HO "Disable"
+	call Obj_Kord.Move_to_next_waypoint "-558.407959,52.748043,-431.931244"
+	call Obj_Kord.Move_to_next_waypoint "-574.754517,53.819729,-353.123688"
+	call Obj_Kord.Move_to_next_waypoint "-561.527893,56.944759,-303.724213"
+	call Obj_Kord.Move_to_next_waypoint "-527.369446,54.248150,-234.312744"
+	call Obj_Kord.Move_to_next_waypoint "-543.699829,53.866604,-207.416992"
 
 ;	Check if already killed
 	if !${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -343,36 +339,23 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 }
 
 /**********************************************************************************************************
- 	Named 4 ***********************    Move to, spawn and kill - Derussah the Deceptive  *****************************
+ 	Named 4 ***********************    Move to, spawn and kill - Derussah the Deceptive *******************
 ***********************************************************************************************************/
 	
 function:bool Named4(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="-763.01, 53.98, -374.56"
-;	Ob_AutoTarget:AddActor["",0,FALSE,FALSE]
+	variable point3f KillSpot="-725.166504,58.574047,-351.647858"
+	Ob_AutoTarget:AddActor["a violent vortex",0,FALSE,FALSE]
+
 
 ; 	Move to named and spawn
 	call Obj_Kord.Initialise_move_to_next_boss "${_NamedNPC}" "4"
-	call Obj_Kord.Move_to_next_waypoint "-521.64, 53.95, -182.85"
-	call Obj_Kord.Move_to_next_waypoint "-508.64, -5.46, -134.00"
-	call Obj_Kord.Move_to_next_waypoint "-541.93, -4.96, -148.98"
-	
-	oc !ci -pause igw:${Me.Name}
-	oc !ci -ApplyVerbForWho igw:${Me.Name} "pick_sign" "Teleport"
-	wait 50
-	
-	call Obj_Kord.Move_to_next_waypoint "-536.87, 53.07, -170.75"
-	call Obj_Kord.Move_to_next_waypoint "-588.33, 52.32, -184.61"
-	call Obj_Kord.Move_to_next_waypoint "-615.89, 55.36, -205.61"
-	call Obj_Kord.Move_to_next_waypoint "-638.86, 52.25, -229.83"
-	call Obj_Kord.Move_to_next_waypoint "-663.97, 53.12, -252.16"
-	call Obj_Kord.Move_to_next_waypoint "-708.90, 54.58, -281.36"
-	call Obj_Kord.Move_to_next_waypoint "-736.04, 53.70, -297.54"
-	call Obj_Kord.Move_to_next_waypoint "-762.68, 54.44, -322.82"
-	call Obj_Kord.Move_to_next_waypoint "-776.57, 54.37, -326.90"
-	call Obj_Kord.Move_to_next_waypoint "-763.01, 53.98, -374.56"
-
-	Ob_AutoTarget:AddActor["a violent vortex",0,FALSE,FALSE]
+	call Obj_Kord.Move_to_next_waypoint "-561.170410,53.473160,-175.265839"
+	call Obj_Kord.Move_to_next_waypoint "-628.469604,54.586197,-220.981659"
+	call Obj_Kord.Move_to_next_waypoint "-697.018860,54.580528,-276.472443"
+	call Obj_Kord.Move_to_next_waypoint "-751.669739,54.345325,-302.581665"
+	call Obj_Kord.Move_to_next_waypoint "-775.931824,54.551044,-344.077972"
+	call Obj_Kord.Move_to_next_waypoint "-765.776672,53.977970,-368.875488"
 
 ;	Check if already killed
 	if !${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -417,23 +400,16 @@ function:bool Named4(string _NamedNPC="Doesnotexist")
 	
 function:bool Named5(string _NamedNPC="Doesnotexist")
 {
-	variable point3f KillSpot="-802.35, 55.01, -391.60"
-;	Ob_AutoTarget:AddActor["",0,FALSE,FALSE]
+	variable point3f PullSpot="-820.606628,53.940506,-434.559326"
+	variable point3f KillSpot="-789.898926,55.005562,-403.997314"
+	Ob_AutoTarget:AddActor["Hasira's Marker",0,FALSE,FALSE]
 
 ; 	Move to named and spawn
 	call Obj_Kord.Initialise_move_to_next_boss "${_NamedNPC}" "5"
-	
-	call Obj_Kord.Move_to_next_waypoint "-761.25, 54.05, -370.52"
-	call Obj_Kord.Move_to_next_waypoint "-758.56, 53.99, -369.01"
-	call Obj_Kord.Move_to_next_waypoint "-731.64, 58.57, -353.93"
-	call Obj_Kord.Move_to_next_waypoint "-766.65, 54.00, -373.98"
-	call Obj_Kord.Move_to_next_waypoint "-766.99, 54.32, -402.55"
-	call Obj_Kord.Move_to_next_waypoint "-765.41, 54.16, -448.92"
-	call Obj_Kord.Move_to_next_waypoint "-792.53, 54.57, -471.02"
-	call Obj_Kord.Move_to_next_waypoint "-759.94, 53.79, -445.42"
-	call Obj_Kord.Move_to_next_waypoint "-765.05, 54.25, -406.00"
-	call Obj_Kord.Move_to_next_waypoint "-790.81, 55.01, -403.02"
-	call Obj_Kord.Move_to_next_waypoint "-802.35, 55.01, -391.60"
+	call Obj_Kord.Move_to_next_waypoint "-728.745911,58.574154,-353.300629" 12
+	call Obj_Kord.Move_to_next_waypoint "-760.178345,54.047398,-372.736816"
+	call Obj_Kord.Move_to_next_waypoint "-771.956238,54.326454,-397.312225"
+	call Obj_Kord.Move_to_next_waypoint "-816.109741,53.926617,-432.535187"
 
 ;	Check if already killed
 	if !${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -443,25 +419,21 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	}
 
 ;	Kill named
-	if ${OgreBotAPI.ZoneName.Equal["${Solo_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_1_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_2_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
-
-	if ${OgreBotAPI.ZoneName.Equal["${Heroic_3_Zone_Name}"]}
-	{
-		call Obj_Kord.Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
-	}
+	oc !ci -SetUpFor igw:${Me.Name}
+	oc ${Me.Name} is pulling ${_NamedNPC}
+	Obj_OgreIH:SetCampSpot
+	Obj_OgreIH:ChangeCampSpot["${PullSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	oc !ci -PetOff igw:${Me.Name}
+	wait 10
+	Actor["${_NamedNPC}"]:DoTarget
+	Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	wait 50
+	oc !ci -PetAssist igw:${Me.Name}
+	call Obj_OgreUtilities.HandleWaitForCombat
+	call Obj_OgreUtilities.WaitWhileGroupMembersDead
+	wait 50
 	
 ;	Check named is dead
 	if ${Actor[Query,Name=="${_NamedNPC}" && Type=="NamedNPC"].ID(exists)}
@@ -471,4 +443,18 @@ function:bool Named5(string _NamedNPC="Doesnotexist")
 	}
 	return TRUE
 }
+}
+
+function Kill_Orb(point3f KillSpot)
+{
+	oc !ci -PetOff igw:${Me.Name}
+	Obj_OgreIH:ChangeCampSpot["${KillSpot}"]
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+	oc !ci -PetAssist igw:${Me.Name}
+	while ${Actor[Query,Name=="Forerunner's Blink Buoy" && Distance < 15].ID(exists)}
+	{
+		waitframe
+	}
+	call Obj_OgreUtilities.HandleWaitForCombat
+	call Obj_OgreUtilities.WaitWhileGroupMembersDead
 }
