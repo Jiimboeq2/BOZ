@@ -88,7 +88,20 @@ objectdef Object_Instance
 			call Obj_OgreIH.Get_Chest
 			_StartingPoint:Inc
 		}
-		
+; 	Enter name and shinies nav point for Named 4.
+
+		if ${_StartingPoint} == 4
+		{
+			call This.Named4 "General Ra'Zaal"
+			if !${Return}
+			{
+				Obj_OgreIH:Message_FailedZone["#4: General Ra'Zaal"]
+				return FALSE
+			}
+			call Obj_OgreIH.Get_Chest
+			_StartingPoint:Inc
+		}
+				
 		
 ; 	Enter /loc for the zone out	and change _StartingPoint == 
 
@@ -280,8 +293,11 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 		Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="Lyrissa Nostrolo"].ID}"]
 		wait 5
 		Actor[Query,Name=="Lyrissa Nostrolo"]:DoubleClick
+		Actor[Query, Name == "Lyrissa Nostrolo" && Type == "NoKill NPC"]:Hail
 	}
 	Actor[Query,Name=="Lyrissa Nostrolo"]:DoubleClick
+	Actor[Query, Name == "Lyrissa Nostrolo" && Type == "NoKill NPC"]:Hail
+	wait 50
 
 	Ob_AutoTarget:AddActor["Kapuji-bashi Haakhaz",20,FALSE,TRUE]
 ;	Check if already killed
@@ -294,6 +310,76 @@ function:bool Named3(string _NamedNPC="Doesnotexist")
 ;	Kill named
 	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
 	{
+		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
+	}
+	
+;	Check named is dead
+	if ${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	{
+		Obj_OgreIH:Message_FailedToKill["${_NamedNPC}"]
+		return FALSE
+	}
+	return TRUE
+}
+
+
+/**********************************************************************************************************
+ 	Named 4 ******************    Move to, spawn and kill - General Ra'Zaal ********************************
+	 
+	 			 ;kill adds or wipe
+				; TODO call HO's and use on adds other wise they repop
+***********************************************************************************************************/
+	
+function:bool Named4(string _NamedNPC="Doesnotexist")
+{
+	variable point3f KillSpot="336.15, 20.87, -355.79"
+
+	Actor[Query,Name=="Vahravi"]:DoubleClick
+	Actor[Query, Name == "Vahravi" && Type == "NoKill NPC"]:Hail
+	wait 50
+
+; 	Move to named and spawn
+	call initialise_move_to_next_boss "${_NamedNPC}" "5"
+	call move_to_next_waypoint "367.44, 20.85, -337.61"
+	call move_to_next_waypoint "343.45, 20.85, -354.23"
+	call move_to_next_waypoint "336.15, 20.87, -355.79"
+
+	wait 10
+	Actor[Query,Name=="General Ra'Zaal"]:DoTarget
+	while ${Actor[Query,Name=="General Ra'Zaal"].Distance} > 5
+	{
+		Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="General Ra'Zaal"].ID}"]
+		wait 5
+		Actor[Query,Name=="General Ra'Zaal"]:Hail
+	}
+	Actor[Query,Name=="General Ra'Zaal"]:DoubleClick
+	Obj_OgreIH:ChangeCampSpot["${SoloKillSpot}"]
+	while ${Actor[Query, Name=="${_NamedNPC}" && Type=="NoKill NPC"].ID(exists)}
+	{
+		wait 20
+		
+		Actor[Query, Name == "General Ra'Zaal" && Type == "NoKill NPC"]:Hail
+		Actor[Query, Name == "General Ra'Zaal" && Type == "NoKill NPC"]:DoubleClick
+	}
+	
+	call move_to_next_waypoint "82.233963,7.944616,-300.831512"
+	Obj_OgreIH:CCS_Actor["${Actor[Query,Name=="${_NamedNPC}"].ID}"]
+	wait 50
+
+	Ob_AutoTarget:AddActor["Ra'Zaal's ghul",20,FALSE,TRUE]
+	Ob_AutoTarget:AddActor["General Ra'Zaal",20,FALSE,TRUE]
+
+;	Check if already killed
+	if !${Actor[namednpc,"${_NamedNPC}"].ID(exists)}
+	{
+		Obj_OgreIH:Message_NamedDoesNotExistSkipping["${_NamedNPC}"]
+		return TRUE
+	}
+
+;	Kill named
+	if ${Zone.Name.Equals["${Solo_Zone_Name}"]} || ${Zone.Name.Equals["${Heroic_1_Zone_Name}"]}
+	{
+		call HO "All"
 		call Tank_n_Spank "${_NamedNPC}" "${KillSpot}"
 	}
 	
