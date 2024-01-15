@@ -22,7 +22,7 @@ variable int ShiniesLooted="0"
 
 function main(int _StartingPoint=0, ... Args)
 {
-call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
+	call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
 }
 atom atexit()
 {
@@ -41,6 +41,7 @@ objectdef Object_Instance
 		oc !ci -LetsGo igw:${Me.Name}
 		Obj_OgreIH:SetCampSpot
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_movetoarea TRUE TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_loot_lo_looteverything FALSE TRUE
 		
 		if ${_StartingPoint} == 0
 		{

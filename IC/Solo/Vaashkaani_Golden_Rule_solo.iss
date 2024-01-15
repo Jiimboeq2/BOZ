@@ -2,4 +2,4 @@
 
 variable string sZoneName="Vaashkaani: Golden Rule [Solo]"
 variable string sDifficulty="Normal"
-#include "../Vaashkaani_Golden_Rule_common.iss"
+#include "../Vaashkaani_Golden_Rule_Common.iss"

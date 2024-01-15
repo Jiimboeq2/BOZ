@@ -2,4 +2,4 @@
 
 variable string sZoneName="Zimara Breadth: Wisdom's Plight [Solo]"
 variable string sDifficulty="Normal"
-#include "../Zimara_Breadth_Wisdom's_Plight_common.iss"
+#include "../Zimara_Breadth_Wisdoms_Plight_Common.iss"

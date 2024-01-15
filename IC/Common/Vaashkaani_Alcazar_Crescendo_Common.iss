@@ -25,6 +25,7 @@ objectdef Object_Instance
 		Obj_OgreIH:SetCampSpot
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_movetoarea TRUE TRUE
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} textentry_setup_moveintomeleerangemaxdistance 20 TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_loot_lo_looteverything FALSE TRUE
 		if ${Zone.Name.Equals["${Solo_Zone_Name}"]}
 		{
 			Obj_InstanceControllerXML:Set_ICFileOption[1,"Graceless on Boss Only"]
