@@ -1,16 +1,26 @@
+
+;	variable bool CheckState=
+;	CheckState:Set[${TabConfig.Settings.checkbox_settings_npc_cast_monitoring}]
+;	oc !ci -ChangeOgreBotUIOption ${Me.Name} checkbox_settings_npc_cast_monitoring ${CheckState} TRUE
+
+
 ; DO NOT MESS WITH THE FOLLOWING CODE.
 
 variable string Solo_Zone_Name="Splendor Sky Aerie: Vale Invasion [Solo]"
 variable string Heroic_1_Zone_Name="Splendor Sky Aerie: Vale Invasion [Event Heroic I]"
-variable string Heroic_2_Zone_Name="X"
+variable string Named1="Magmalatorr"
+variable string Named2="Tkesh'Tura"
+variable string Named3="Kusala'Din"
 variable int DefaultScanRadius="30"
 variable int ShiniesLooted="0"
+variable int iCount="0"
 
 #include "${LavishScript.HomeDirectory}/Scripts/EQ2OgreBot/InstanceController/Ogre_Instance_Include.iss"
+#include "${LavishScript.HomeDirectory}/Scripts/EQ2OgreBot/InstanceController/Support_Files_Common/Kordulek_ICFunctions.iss"
 
 function main(int _StartingPoint=0, ... Args)
 {
-call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
+	call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
 }
 atom atexit()
 {
@@ -28,6 +38,7 @@ objectdef Object_Instance
 		oc !ci -LetsGo igw:${Me.Name}
 		Obj_OgreIH:SetCampSpot
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_movetoarea TRUE TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_loot_lo_looteverything FALSE TRUE
 		
 		if ${_StartingPoint} == 0
 		{

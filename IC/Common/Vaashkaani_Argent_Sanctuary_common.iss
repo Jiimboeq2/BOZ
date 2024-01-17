@@ -7,10 +7,11 @@ variable int DefaultScanRadius="30"
 variable int ShiniesLooted="0"
 
 #include "${LavishScript.HomeDirectory}/Scripts/EQ2OgreBot/InstanceController/Ogre_Instance_Include.iss"
+#include "${LavishScript.HomeDirectory}/Scripts/EQ2OgreBot/InstanceController/Support_Files_Common/Kordulek_ICFunctions.iss"
 
 function main(int _StartingPoint=0, ... Args)
 {
-call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
+	call function_Handle_Startup_Process ${_StartingPoint} "-NoAutoLoadMapOnZone" ${Args.Expand}
 }
 atom atexit()
 {
@@ -24,6 +25,7 @@ objectdef Object_Instance
 		Obj_OgreIH:SetCampSpot
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_settings_movetoarea TRUE TRUE
 		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} textentry_setup_moveintomeleerangemaxdistance 20 TRUE
+		oc !ci -ChangeOgreBotUIOption igw:${Me.Name} checkbox_loot_lo_looteverything FALSE TRUE
 		if ${Zone.Name.Equals["${Solo_Zone_Name}"]}
 		{
 			Obj_InstanceControllerXML:Set_ICFileOption[1,"Graceless on Boss Only"]
@@ -632,6 +634,48 @@ function Tank_n_Spank(string _NamedNPC, point3f KillSpot)
 	;	}
  ;   }
 
+function EnterPortal(string PortalName, string Command, ... Args)
+{
+	variable int iCounter
+	variable bool bMoveToPortal=TRUE
+
+	for ( iCounter:Set[1] ; ${iCounter} <= ${Args.Used} ; iCounter:Inc )
+	{
+		switch ${Args[${iCounter}]}
+		{
+			; Some "portals" front is not in a good spot, so move ahead of time, then use this function to click it.
+			case -NoMove
+				bMoveToPortal:Set[FALSE]
+			break
+		}
+	}
+
+	oc !ci -runwalk igw:${Me.Name}
+
+	if ${bMoveToPortal}
+	{
+		Obj_OgreIH:SetCampSpot
+		oc !ci -SetCS_InFrontNPC "igw:${Me.Name}" "${Actor[Query,Name=="${PortalName}"].ID}" 1
+	}
+	call Obj_OgreUtilities.HandleWaitForCampSpot 10
+
+	; lets make sure everyone is near by (if this cases a problem because this is being used for a single person to do running, it can be removed or added as a -flag)
+	call Obj_OgreUtilities.HandleWaitForGroupDistance 5
+	wait 10
+	; Apparently a lot of portals you can't use them if you're in combat
+	call Obj_OgreUtilities.HandleWaitForCombat "-wait" 20
+
+	; Clear campspot so after rwe get through the portal, we don't move.
+	Obj_OgreIH:ClearCampSpot
+	Obj_OgreIH:Set_NoMove
+	; Because this command is queued into Ogrebot, we need to wait for people to finish their casting. We should be generious with how much time that could take.
+	oc !ci -ApplyVerbQueuedForWho igw:${Me.Name} "${PortalName}" "${Command}"
+	wait 50
+	oc !ci -runwalk igw:${Me.Name}
+
+	; I'm not sure where we should leave this, with campspot on? off?
+	; In this file, the following call is always move_to_next and that issues a new campspot. Which is good. Leaving this for now (which, as it is above, has campspot cleared)
+}
 function HO(string Mode)
 {
 	switch ${Mode}
