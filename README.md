@@ -25,3 +25,18 @@ Obj_OgreMCP:PasteButton[RawCommand,Pre-Pull,oc,!c,-AbilityTag,AUTO,PreCastTag,20
 
 For patcher ignore list simply add it to 
 C:\Program Files (x86)\InnerSpace\Extensions , or where ever your extensions folder is , not x64.
+
+
+---
+
+## New OgreBot / new OgreCraft (Ogre's new native bot)
+
+Every cast stack pack (.zip) also holds `New OgreBot/<name>.json`, and every spell queue `<name>.xml` has `<name>.json`
+beside it. The `.xml` files are for the old OgreBot / OgreCraft, the `.json` files for the new.
+
+- **Cast stack, new OgreBot:** copy the `.json` from the pack's `New OgreBot` folder into
+  `C:\Program Files (x86)\InnerSpace\Scripts\OgreSave\EQ2\OgreBot\Profiles\Import`, then OgreBot's **Admin** tab:
+  **Refresh List**, click it under **Profiles you can import**, **Import Profile**.
+- **Spell queue, new OgreCraft:** copy the `.json` into `C:\Program Files (x86)\InnerSpace\Scripts\OgreSave\EQ2\Craft\queues`.
+  It is listed on OgreCraft's **Queues** tab under **Save / load a queue**: click its name, then **Load Queue**.
+- **With ISXJQB:** `jb csimport BOZ` in game imports your class's stack for you.
